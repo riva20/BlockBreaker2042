@@ -58,6 +58,7 @@ function drawBall(){
     cntxt.fillStyle = '#d300d3';
     cntxt.fill();
     cntxt.closePath();
+    
 }
 
 //Draw paddle on canvas
@@ -66,8 +67,10 @@ function drawPaddle(){
     cntxt.rect(paddle.x, paddle.y, paddle.w, paddle.h);
     cntxt.fillStyle = '#d300d3';
     cntxt.fill();
-    cntxt.closePath();
+    cntxt.closePath(); 
+   // cntxt.endPath();
 }
+//end path
 
 
 //Function to draw blocks on the canvas
@@ -76,11 +79,15 @@ function drawBlocks(){
         column.forEach(block => {
             cntxt.beginPath();
             cntxt.rect(block.x, block.y, block.w, block.h);
+          //  cntxt.rect(block.w, block.h, block.y, block.x);
             cntxt.fillStyle = block.visible ? '#d300d3' : 'transparent';
             cntxt.fill();
             cntxt.closePath();
         })
     });
+
+    //end
+   
 }
 
 //Drawing score on the canvas
@@ -91,7 +98,8 @@ function drawScore(){
 //Function to move paddle on the canvas
 function movePaddle(){
     paddle.x += paddle.dx;
-
+   // paddle.x -= paddle.dx;
+   // paddle.y += paddle.dy;
     //Surrounding wall detection
     //To the right side
     
@@ -105,11 +113,28 @@ function movePaddle(){
 function moveBall(){
     ball.x += ball.dx;
     ball.y += ball.dy;
+   // ball.y += ball.dx;
 
     //Surrounding wall collision detection(x-axis)
     //right and left walls
-    
+    if(ball.x<=0)
+    {
+        ball.dx=4;
 
+    }
+    if(ball.x>=canvas.width)
+    {
+        ball.dx=-4;
+    }
+    if(ball.y<=0)
+    {
+        ball.dy=4;
+
+    }
+    if(ball.y>=canvas.height)
+    {
+        ball.dy=-4;
+    }
     //Surrounding wall collision detection(y-axis)
     //top and bottom walls
     
@@ -121,14 +146,16 @@ function moveBall(){
     blocks.forEach(column => {
         column.forEach(block => {
             if(block.visible){
-                
+                //end
+               // cntxt.endPath();
             }
+            
         });
     });
 
     //Lose on missing paddle
     if(ball.y + ball.size > canvas.height){
-        
+       
     }
 }
 
@@ -144,6 +171,8 @@ function showAllBlocks(){
             block.visible = true;
         })
     })
+    //end
+   
 }
 
 function showGamePauseText(){
