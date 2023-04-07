@@ -50,6 +50,16 @@ const paddle = {
     speed: 8,
     dx: 0
 }
+if(paddle.x >= canvas.width) {
+
+    paddle.x -= 24;
+}
+
+
+if(paddle.x <= 0) {
+
+    paddle.x += 20;
+}
 
 //Draw ball onto canvas
 function drawBall(){
