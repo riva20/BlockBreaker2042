@@ -92,6 +92,8 @@ function drawScore(){
 function movePaddle(){
     paddle.x += paddle.dx;
 
+   // paddle.y += paddle.dy;
+
     //Surrounding wall detection
     //To the right side
     
@@ -105,7 +107,8 @@ function movePaddle(){
 function moveBall(){
     ball.x += ball.dx;
     ball.y += ball.dy;
-
+    
+   
     //Surrounding wall collision detection(x-axis)
     //right and left walls
     
@@ -118,6 +121,31 @@ function moveBall(){
     
 
     //Block collision functionality
+}
+    function keyDown(e){
+        if(e.key === 'Right' || e.key === 'ArrowRight'){
+            
+    
+        } else if(e.key === 'Left' || e.key === 'ArrowLeft'){
+    
+    paddle.dx=8;
+        }
+         else if(e.key === 'Left' || e.key === 'ArrowLeft'){
+    paddle.dx=-8;
+        } 
+    }
+    function keyUp(e){
+        // console.log(e.key);
+        if(e.key === 'Right' || e.key === 'ArrowRight' || e.key === 'Left' || e.key === 'ArrowLeft'){
+    
+      paddle.dx=0;
+        }
+
+        } 
+    
+        
+        
+    
     blocks.forEach(column => {
         column.forEach(block => {
             if(block.visible){
@@ -130,7 +158,7 @@ function moveBall(){
     if(ball.y + ball.size > canvas.height){
         
     }
-}
+
 
 //Funcion to increase score as block is hit
 function increaseScore(){
@@ -165,6 +193,8 @@ function draw(){
     drawScore();
     drawPaddle();
     drawBlocks();
+   // keyDown();
+   // keyUp();
 }
 
 //Update canvas animation and drawing
@@ -187,21 +217,10 @@ update();
 //restartBtn.style.visibility='hidden';
 //Keydown event function
 //Targetting the right and left arrow keys
-function keyDown(e){
-    if(e.key === 'Right' || e.key === 'ArrowRight'){
 
-    } else if(e.key === 'Left' || e.key === 'ArrowLeft'){
-
-    } 
-}
 
 //Keyup event function
-function keyUp(e){
-    // console.log(e.key);
-    if(e.key === 'Right' || e.key === 'ArrowRight' || e.key === 'Left' || e.key === 'ArrowLeft'){
 
-    } 
-}
 
 //Keyboard event handlers
 document.addEventListener('keydown', keyDown);
